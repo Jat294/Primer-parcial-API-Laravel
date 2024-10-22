@@ -15,8 +15,14 @@ class Vehicle extends Model
         'type',
         'price',
         'description',
-        'is_available'
+        'is_available',
+        'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     protected static function newFactory()
     {

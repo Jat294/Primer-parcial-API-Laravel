@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VechicleRequest;
+use App\Http\Requests\UpdateVehicleRequest;
 use App\Models\Vehicle;
 use \Illuminate\Http\Response;
 use Illuminate\Http\Request;
@@ -31,13 +32,15 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
+        // Cargar la relación de categoría con el vehículo
+        $vehicle->load('category');
         return response()->json(['vehicle' => $vehicle], Response::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(VechicleRequest $request, Vehicle $vehicle)
+    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
     {
         $vehicle->update($request->all());
         return response()->json(['vehicle' => $vehicle], Response::HTTP_OK);
